@@ -1,53 +1,63 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import styled from 'styled-components'
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-class BlogIndex extends React.Component {
+import BigButton from "../components/bigbutton"
+import CustomFooter from "../components/customfooter"
+import SocialLinks from "../components/sociallinks"
+import StyledBackgroundSection from "../components/styledbackgroundsection"
+
+
+const SubHeading = styled.h2`
+  font-size: 28px;
+  color: white;
+`
+
+class HomePage extends React.Component {
   render() {
     const { data } = this.props
+    // console.log(JSON.stringify(data, null, 4))
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          return (
-            <article key={node.fields.slug}>
-              <header>
-                <h3
-                  style={{
-                    marginBottom: rhythm(1 / 4),
-                  }}
-                >
-                  <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                    {title}
-                  </Link>
-                </h3>
-                <small>{node.frontmatter.date}</small>
-              </header>
-              <section>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt,
-                  }}
-                />
-              </section>
-            </article>
-          )
-        })}
-      </Layout>
+      <div>
+      <StyledBackgroundSection>
+        <div
+          style={{
+            marginLeft: `auto`,
+            marginRight: `auto`,
+            maxWidth: rhythm(24),
+            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          }}
+        >
+
+        <header>
+          <SEO title="Home" />
+          <Bio />
+        </header>
+
+
+        <main>
+          <SubHeading>Work:</SubHeading>
+          <BigButton title="web dev" subtitle="(projects, resume, technical deets)" link="/web/" />
+          <BigButton title="writing" subtitle="(essays, reviews, thoughts)" link="/writing/" />
+          <SubHeading>Links:</SubHeading>
+          <SocialLinks />
+         </main>
+       </div>
+      <CustomFooter />
+      </StyledBackgroundSection>
+    </div>
     )
   }
 }
 
-export default BlogIndex
+export default HomePage
 
 export const pageQuery = graphql`
   query {
