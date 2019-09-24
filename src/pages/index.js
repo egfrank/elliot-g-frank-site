@@ -20,7 +20,6 @@ const SubHeading = styled.h2`
 class HomePage extends React.Component {
   render() {
     const { data } = this.props
-    // console.log(JSON.stringify(data, null, 4))
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
 

@@ -1,10 +1,12 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from 'styled-components'
+import '../styles/index.css'
 
- 
+
 const Title = styled.h1`
   font-size: 64px;
+  font-family: Arvo, sans-serif;
 `
 
 const Subtitle = styled.p`
