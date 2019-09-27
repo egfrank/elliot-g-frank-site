@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Img from "gatsby-image"
 
 import Layout from '../components/layout'
-
+import SEO from '../components/seo'
 
 
 const PortfolioContainer = styled.div`
@@ -26,8 +26,8 @@ const ProjectItem = styled.div`
 `
 
 const ProjectHeader = styled.div`
-  width: auto;
-  height: 350px;
+  max-height: 30%;
+  max-width: 100%;
   background-color: grey;
 `
 
@@ -40,6 +40,7 @@ const ProjectName = styled.h2`
 
 const ProjectDescription = styled.p`
   font-family: 'Source Serif Pro', serif;
+
 `
 
 const TextContainer = styled.div`
@@ -55,17 +56,17 @@ const Em = styled.span`
 
 
 
-const Project = () => {
-
+const Project = ( {node} ) => {
   return (
     <ProjectItem>
       <ProjectHeader>
+        <Img fluid={node.frontmatter.featuredImage.childImageSharp.fluid} />
       </ProjectHeader>
 
       <TextContainer>
-          <ProjectName>Bike Philadelphia</ProjectName>
-          <ProjectDescription>A web app that visualizes data about the 117 stations of Philadelphia’s bikeshare system (Indego), and is designed for users looking for either available bikes or empty spots in stations across the city. 
-          </ProjectDescription>
+          <ProjectName>{node.frontmatter.title}</ProjectName>
+          <ProjectDescription 
+            dangerouslySetInnerHTML={{__html: node.html}}/>
       </TextContainer>
     </ProjectItem>
     );
@@ -74,14 +75,20 @@ const Project = () => {
 class WebPortfolio extends React.Component {
 
   render() {
-    
+    const data = this.props.data;
+    const blurbs = data.allMarkdownRemark.edges;
     return (
       <Layout title='Web development'>
+        <SEO title="Web" />
               <PortfolioContainer>
               <PorfolioFlexBox>
-              <Project />
-              <Project />
-              <Project />
+              { data.allMarkdownRemark.edges
+                .map((blurb) => {
+                  return (<Project key={blurb.node.id}
+                           node={blurb.node}
+                  />)
+                })
+              }
               </PorfolioFlexBox>
               </PortfolioContainer>
 
@@ -91,7 +98,43 @@ class WebPortfolio extends React.Component {
 }
 
 
-export default WebPortfolio
+export default WebPortfolio;
+
+
+
+export const query = graphql`
+query IndexQuery {
+  allMarkdownRemark(
+    filter: {fileAbsolutePath: {regex: "/web.*blurb/"}}, 
+    sort: {fields: [frontmatter___date], order: DESC}) 
+  
+  {
+    totalCount
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 1000) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+        html
+        fileAbsolutePath
+        fields {
+          slug
+        }
+
+      }
+    }
+  }
+}
+
+`
 
 
 
