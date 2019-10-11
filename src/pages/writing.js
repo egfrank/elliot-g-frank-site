@@ -14,8 +14,7 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" />
-        <Bio />
+        <SEO title="Writing" />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -56,7 +55,12 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: DESC }
+          filter: {fileAbsolutePath: {regex: "/\/blog\//"}}
+          limit: 1000
+    )
+    {
       edges {
         node {
           excerpt

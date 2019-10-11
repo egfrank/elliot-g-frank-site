@@ -7,28 +7,27 @@
 
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
 
-import { rhythm } from "../utils/typography"
 import styled from 'styled-components'
 
 const Paragraph = styled.p`
-    font-size: 36px;
+    font-size: 20px;
     color: white;
+    font-family: 'Karla', sans-serif;
+    line-height: 24px;
 `
+
+const Em = styled.span`
+    font-weight: bold;
+`
+
 
 const Bio = () => {
   return (
-    <div
-      style={{
-        display: `flex`,
-        marginBottom: rhythm(1),
-      }}
-    >
-      <Paragraph>
-        <strong>Elliot Frank</strong> is a web developer and
-        writer who lives in Chicago.
-      </Paragraph>
+    <div>
+      <Paragraph><Em>Elliot Frank</Em> is a web developer and writer. <br/><br/>
+      He is based in Chicago.
+</Paragraph>
     </div>
   )
 }
