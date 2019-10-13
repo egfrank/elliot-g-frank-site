@@ -50,8 +50,8 @@ const SocialLinks = () => {
 						icon={['fab', 'instagram']} 
 						style={{fontSize: '26px'}}
 			/>
-			<SocialLink icon={'file'} />
-			<SocialLink icon={'envelope'} />
+			<SocialLink link='mailto:elliot.g.frank@gmail.com'
+						icon={'envelope'}/>
   		</Flex>
   )
 }
