@@ -8,22 +8,9 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 
 
-// const PortfolioContainer = styled.div`
-//   box-size: border-box;
-//   margin: 50px 50px 0 0;
-// `
-
-// const PorfolioFlexBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   margin: -30px 0;
-// `
-
-// const ProjectItem = styled.div`
-//   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
-//   background-color: white;
-// `
 const ProjectItem = styled.div`
+  width: 80%;
+  margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.89);
   a {
     box-shadow: none;
@@ -56,15 +43,19 @@ const ExternalLink = styled.p`
     color: #3000B7;
   }
 `
+const ImageContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
+`
 
 
 
 const Card = ( {node} ) => {
   return (
     <ProjectItem>
-      <div>
+      <ImageContainer>
         <Img fluid={node.frontmatter.featuredImage.childImageSharp.fluid}/>
-      </div>
+      </ImageContainer>
 
       <TextContainer>
           <ProjectName><a href={node.frontmatter.site} target="_blank">{node.frontmatter.title}</a></ProjectName>

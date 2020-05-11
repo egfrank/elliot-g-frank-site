@@ -10,11 +10,15 @@ import styled from 'styled-components'
 
 
 
-const PageHeading = styled.h1`
-  font-family: 'Karla', sans-serif;
-  color: #2F6853;
-  font-size: 24px;
-  margin-top: 100px;
+const Title = styled.h2`
+  font-family: 'Lato', sans-serif;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  margin: 0;
+  text-align: right;
+  font-weight: 400;
+  grid-column: -6 / -2;
+  grid-row: 2 / 3;
 `
 
 
@@ -27,11 +31,7 @@ class BlogIndex extends React.Component {
     const posts = data.allMarkdownRemark.edges
     if ( posts === undefined || posts.length === 0){
       return (
-        <Layout location={this.props.location} title='Writing'>
-          <SEO title="Writing" />
-
-          <PageHeading>This blog is still under construction.</PageHeading>
-        </Layout>
+          <Title>This blog is still under construction.</Title>
       )
     }
 

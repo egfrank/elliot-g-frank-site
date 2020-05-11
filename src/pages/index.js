@@ -4,12 +4,12 @@ import styled from 'styled-components'
 
 import Img from "gatsby-image"
 import  Card  from '../components/card'
-
+import Menu from '../components/Menu'
 
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-rows: 16rem 20rem 20rem 64rem 4rem;
+  grid-template-rows: 16rem 32rem 32rem 64rem 4rem;
   grid-template-columns: 0 1fr 0;
   @media (min-width: 800px){
     grid-template-columns: 1fr 800px 1fr;
@@ -183,7 +183,7 @@ const Clips = (props) => {
       {nodes.map((entry) => {
         return (<WritingEntry key={entry.node.frontmatter.title}
                               title={entry.node.frontmatter.title}
-                              description={entry.node.frontmatter.description}
+                              description={entry.node.frontmatter.source}
                 />)
         })
       }
@@ -273,7 +273,7 @@ export const query = graphql`
 const HomePage = ( {data} ) => {
   return (
     <GridContainer>
-
+        <Menu />
         <IntroContainer>
           <IntroText>Elliot Frank is a writer and web developer based in Chicago.
           </IntroText>
