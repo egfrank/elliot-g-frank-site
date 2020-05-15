@@ -3,6 +3,7 @@ title: "Reading Rec: Times Square Red Times Square Blue"
 source: "Indoorsy"
 date: "2020-05-07"
 description: "Be gay do crimes"
+link: ""
 ---
 
 This is my first post on my new fake blog! How exciting!
