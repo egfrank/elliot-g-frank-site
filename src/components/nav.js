@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledNav } from './Nav.styled';
+import { StyledNav } from './nav.styled';
 import { Link } from 'gatsby'
 
 const Nav = ({open}) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledBurger } from './Burger.styled';
+import { StyledBurger } from './burger.styled';
 
 
 const Burger = (props) => {
