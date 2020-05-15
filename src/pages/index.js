@@ -3,9 +3,10 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from 'styled-components'
 
 import Img from "gatsby-image"
-import  Card  from '../components/card'
+import Card  from '../components/card'
 import Menu from '../components/Menu'
-
+import SEO from '../components/seo'
+import CustomFooter from '../components/customfooter'
 
 const GridContainer = styled.div`
   display: grid;
@@ -14,6 +15,7 @@ const GridContainer = styled.div`
   @media (min-width: 800px){
     grid-template-columns: 1fr 800px 1fr;
   }
+
 `
 
 const Title = styled.h2`
@@ -92,6 +94,7 @@ const WebContainer = styled.div`
   @media (min-width: 18.75rem){
     grid-template-rows: 1rem 3rem 1rem 1fr 1rem;
   }
+  background-color: rgba(139, 255, 172, 0.24);
 `
 
 const GreenCenter = styled.div`
@@ -123,6 +126,7 @@ const ContactsContainer = styled.div`
   grid-column: 2 / 3;
 
 `
+
 const WritingTitle = styled.p`
   font-size: 1.5rem;
   line-height: 1.75rem;
@@ -137,14 +141,30 @@ const WritingSubTitle = styled.p`
 `
 
 
-const WritingEntry = (props) => {
+const A = styled.a`
+  color: 'inherit',
+  textDecoration: 'inherit',
+  boxShadow: 'none'
+`
+
+const BlogEntry = (props) => {
   return (
-    <div>
+    <div >
       <WritingTitle>{props.title}</WritingTitle>
       <WritingSubTitle>{props.description}</WritingSubTitle>
     </div>
     )
 }
+
+const ClipEntry = (props) => {
+  return (
+    <div >
+      <WritingTitle style={{display: 'inline'}}>{props.title} </WritingTitle>
+      <WritingSubTitle style={{display: 'inline'}}>{props.source}</WritingSubTitle>
+    </div>
+    )
+}
+
 
 
 const Blog = (props) => {
@@ -152,17 +172,20 @@ const Blog = (props) => {
   return (
     <BlogContainer>
 
-      <Title>Writing</Title>
-      <Subtitle>(self-published)</Subtitle>
+      <Title>
+        <Link to="/blog" style={{
+          color: 'inherit',
+          textDecoration: 'inherit',
+          boxShadow: 'none'
+        }}>Blog</Link>
+      </Title>
       <GreenLeft />
       <WritingEntries>
-      {nodes.map((entry) => {
-        return (<WritingEntry key={entry.node.frontmatter.title}
-                              title={entry.node.frontmatter.title}
-                              description={entry.node.frontmatter.description}
-                />)
-        })
-      }
+      {nodes.map((entry) => 
+        <BlogEntry key={entry.node.frontmatter.title}
+          {...entry.node.frontmatter} />
+      )}
+      
       </WritingEntries>
 
     </BlogContainer>
@@ -171,22 +194,20 @@ const Blog = (props) => {
 
 const Clips = (props) => {
   const nodes = props.data.clips.edges;
-  console.log(JSON.stringify(nodes));
   return (
     <ClipsContainer>
-      <Title>Writing</Title>
-      <Subtitle>(published elsewhere)</Subtitle>
+      <Title><Link to="/clips" style={{
+          color: 'inherit',
+          textDecoration: 'inherit',
+          boxShadow: 'none'
+        }}>Clips</Link></Title>
 
       <GreenRight />
 
       <WritingEntries>
-      {nodes.map((entry) => {
-        return (<WritingEntry key={entry.node.frontmatter.title}
-                              title={entry.node.frontmatter.title}
-                              description={entry.node.frontmatter.source}
-                />)
-        })
-      }
+      {nodes.map((entry) => 
+        <ClipEntry key={entry.node.frontmatter.title} 
+          {...entry.node.frontmatter}/>)}
       </WritingEntries>
     </ClipsContainer>
     )
@@ -198,8 +219,12 @@ class WebDev extends React.Component {
     const blurbs = data.webContent.edges;
     return (
       <WebContainer>
-        <GreenCenter />
-        <WebTitle>Web Development</WebTitle>
+        
+        <WebTitle><Link to="/web" style={{
+          color: 'inherit',
+          textDecoration: 'inherit',
+          boxShadow: 'none'
+        }}>Web Development</Link></WebTitle>
         <WebList>
           { blurbs.map((blurb) => {
               return (<Card key={blurb.node.id}
@@ -216,64 +241,76 @@ class WebDev extends React.Component {
 
 export const query = graphql`
   query {
-    webContent: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/web.*blurb/"}}, sort: {fields: [frontmatter___date], order: DESC}) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            description
-            site
-            frontend
-            backend
-            featuredImage {
-              childImageSharp {
-                fluid(maxWidth: 1000) {
-                  ...GatsbyImageSharpFluid
+    webContent: allMarkdownRemark(
+      filter: {fileAbsolutePath: {regex: "/content/web.*blurb/"}},
+      sort: {fields: [frontmatter___date], order: DESC},
+      limit: 2) {
+        totalCount
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              description
+              site
+              frontend
+              backend
+              featuredImage {
+                childImageSharp {
+                  fluid(maxWidth: 1000) {
+                    ...GatsbyImageSharpFluid
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-    blogContent: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/blog/.*md/"}}, sort: {fields: [frontmatter___date], order: DESC}) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            description
-            date
+    blogContent: allMarkdownRemark(
+      filter: {fileAbsolutePath: {regex: "/content/blog/.*md/"}},
+      sort: {fields: [frontmatter___date], order: DESC}
+      limit: 2) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              description
+              date
+            }
           }
+          
         }
-        
       }
-    }
 
-    clips: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/clips/.*md/"}}, sort: {fields: [frontmatter___date], order: DESC}) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            description
-            source
-            date
+    clips: allMarkdownRemark(
+      filter: {fileAbsolutePath: {regex: "/content/clips/.*md/"}},
+      sort: {fields: [frontmatter___date],
+      order: DESC},
+      limit: 2) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              description
+              source
+              date
+            }
           }
         }
       }
     }
-  }
 `
 
-const HomePage = ( {data} ) => {
+const HomePage = ( {data, location, } ) => {
   return (
+
+    
+
     <GridContainer>
-        <Menu />
+        <SEO title="Home" />
+        <Menu/>
         <IntroContainer>
           <IntroText>Elliot Frank is a writer and web developer based in Chicago.
           </IntroText>
@@ -283,7 +320,7 @@ const HomePage = ( {data} ) => {
         <Clips data={data}/>
         <WebDev data={data}/>
         <ContactsContainer>
-          <p>Contacts</p>
+          <CustomFooter />
         </ContactsContainer>
 
 

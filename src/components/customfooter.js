@@ -1,32 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
+import SocialLinks from './sociallinks'
 
-
-const Div = styled.div`
-	text-align: right;
-	background-color: rgb(220,220,220, 0.1);
+const Footer = styled.div`
+	background-color: white;
+	height: 100%;
+	border-top: 1px solid purple;
 `
 
-const Footer = styled.p`
-	color: white;
-	margin: 0 10px 0 0;
+const SocialLinkContainer = styled.div`
+	display: flex;
+	orientation: row;
+	width: 50%;
+	max-width: 16rem;
+	margin: 1rem auto;
+	justify-content: space-around;
+	a {
+		box-shadow: none;
+	}
 `
-
-const ExternalLink = styled.a`
-	color: white;
-`
-
-const CustomFooter = function CustomFooter(props) { 
+const CustomFooter = () => { 
 	return (
-		<Div>
-			<Footer>
-	          © Elliot Frank {new Date().getFullYear()}, built with
-	          {` `}
-	          <ExternalLink href="https://www.gatsbyjs.org">Gatsby</ExternalLink>
-	        </Footer>
-        </Div>
+		<Footer>
+			<SocialLinkContainer>
+			<SocialLinks/>
+			</SocialLinkContainer>
+    </Footer>
    	)
 }
 
 
-export default CustomFooter
+export default CustomFooter;
