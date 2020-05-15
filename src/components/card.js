@@ -1,7 +1,5 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from 'styled-components'
-
 import Img from "gatsby-image"
 
 
@@ -50,7 +48,6 @@ const ImageContainer = styled.div`
 `
 
 
-
 const Card = ( {node} ) => {
   return (
     <ProjectItem>
@@ -67,17 +64,10 @@ const Card = ( {node} ) => {
             <a href={node.frontmatter.backend}> Backend code </a>| 
             <a href={node.frontmatter.frontend}> Frontend code</a><br/>
           </ExternalLink>
-          
-
-
-          
       </TextContainer>
     </ProjectItem>
     );
 }
-
-
-
 
 export default Card;
 

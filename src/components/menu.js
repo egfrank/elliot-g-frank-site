@@ -1,6 +1,6 @@
 import React from 'react';
-import Burger  from './Burger';
-import Nav from './Nav';
+import Burger  from './burger';
+import Nav from './nav';
 
 class Menu extends React.Component {
   constructor(props) {
@@ -12,11 +12,10 @@ class Menu extends React.Component {
   }
 
   toggleOpen(){
-	this.setState({
-		open: !this.state.open
-	});
+  	this.setState({
+  		open: !this.state.open
+  	});
   }
-
   render() {
   
 	return (

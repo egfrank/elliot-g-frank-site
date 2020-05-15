@@ -1,10 +1,9 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link, graphql } from "gatsby"
 import styled from 'styled-components'
 
-import Img from "gatsby-image"
 import Card  from '../components/card'
-import Menu from '../components/Menu'
+import Menu from '../components/menu'
 import SEO from '../components/seo'
 import CustomFooter from '../components/customfooter'
 
@@ -27,18 +26,6 @@ const Title = styled.h2`
   font-weight: 400;
   grid-column: -6 / -2;
   grid-row: 2 / 3;
-`
-
-
-const Subtitle = styled.h3`
-  font-family: 'Lato', sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.75rem;
-  text-align: right;
-  margin: 0;
-  font-weight: 400;
-  grid-column: -6 / -2;
-  grid-row: 3 / 4;
 `
 const WritingEntries = styled.div`
   text-align: left;
@@ -97,15 +84,6 @@ const WebContainer = styled.div`
   background-color: rgba(139, 255, 172, 0.24);
 `
 
-const GreenCenter = styled.div`
-  background-color: rgba(139, 255, 172, 0.24);
-  grid-column: 1 / -1;
-  grid-row: 1 / 5;
-`
-
-const GreenFinal = styled.div`
-`
-
 
 
 const WebTitle = styled(Title)`
@@ -140,12 +118,6 @@ const WritingSubTitle = styled.p`
   margin: 1rem 0;
 `
 
-
-const A = styled.a`
-  color: 'inherit',
-  textDecoration: 'inherit',
-  boxShadow: 'none'
-`
 
 const BlogEntry = (props) => {
   return (

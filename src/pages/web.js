@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { graphql } from "gatsby"
 import styled from 'styled-components'
 
 import Img from "gatsby-image"
@@ -50,10 +50,6 @@ const TextContainer = styled.div`
   margin: 20px 20px;
 
 `
-const Em = styled.span`
-  font-weight: bold;
-` 
-
 
 
 const Project = ( {node} ) => {
@@ -82,7 +78,7 @@ class WebPortfolio extends React.Component {
         <SEO title="Web" />
               <PortfolioContainer>
               <PorfolioFlexBox>
-              { data.allMarkdownRemark.edges
+              { blurbs
                 .map((blurb) => {
                   return (<Project key={blurb.node.id}
                            node={blurb.node}
