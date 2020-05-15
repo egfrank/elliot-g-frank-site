@@ -1,8 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
+import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 import styled from 'styled-components'
@@ -36,8 +35,8 @@ class BlogIndex extends React.Component {
     }
 
     return (
-      <Layout location={this.props.location} title='Writing'>
-        <SEO title="Writing" />
+      <BlogLayout location={this.props.location} title='Blog'>
+        <SEO title="Blog" />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -64,7 +63,7 @@ class BlogIndex extends React.Component {
             </article>
           )
         })}
-      </Layout>
+      </BlogLayout>
     )
   }
 }

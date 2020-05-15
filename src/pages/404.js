@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
+import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
 
 import styled from 'styled-components'
@@ -26,14 +26,14 @@ class NotFoundPage extends React.Component {
     const siteTitle = data.site.siteMetadata.title
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <BlogLayout location={this.props.location} title={siteTitle}>
         <SEO title="404: Page Not Found" />
         <MainInside>
         <MainText>
         <h1>404: page not found</h1>
         </MainText>
         </MainInside>
-      </Layout>
+      </BlogLayout>
     )
   }
 }

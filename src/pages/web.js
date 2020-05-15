@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import Img from "gatsby-image"
 
-import Layout from '../components/layout'
+import BlogLayout from '../components/bloglayout'
 import SEO from '../components/seo'
 
 
@@ -78,7 +78,7 @@ class WebPortfolio extends React.Component {
     const data = this.props.data;
     const blurbs = data.allMarkdownRemark.edges;
     return (
-      <Layout title='Web development'>
+      <BlogLayout title='Web development'>
         <SEO title="Web" />
               <PortfolioContainer>
               <PorfolioFlexBox>
@@ -92,7 +92,7 @@ class WebPortfolio extends React.Component {
               </PorfolioFlexBox>
               </PortfolioContainer>
 
-      </Layout>
+      </BlogLayout>
     )
   }
 }

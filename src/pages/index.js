@@ -150,8 +150,8 @@ const A = styled.a`
 const BlogEntry = (props) => {
   return (
     <div >
-      <WritingTitle>{props.title}</WritingTitle>
-      <WritingSubTitle>{props.description}</WritingSubTitle>
+      <WritingTitle><Link to={props.slug} style={{color: 'inherit', boxShadow: 'none'}}>{props.title}</Link></WritingTitle>
+      <WritingSubTitle >{props.description}</WritingSubTitle>
     </div>
     )
 }
@@ -183,6 +183,7 @@ const Blog = (props) => {
       <WritingEntries>
       {nodes.map((entry) => 
         <BlogEntry key={entry.node.frontmatter.title}
+          slug={entry.node.fields.slug}
           {...entry.node.frontmatter} />
       )}
       
@@ -278,8 +279,10 @@ export const query = graphql`
               description
               date
             }
+            fields {
+              slug
+            }
           }
-          
         }
       }
 
