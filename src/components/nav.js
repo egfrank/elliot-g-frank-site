@@ -1,21 +1,22 @@
 import React from 'react';
 import { StyledNav } from './Nav.styled';
+import { Link } from 'gatsby'
 
 const Nav = ({open}) => {
   return (
     <StyledNav open={open}>
-      <a href="/">
+      <Link to="/">
         Home
-      </a>
-      <a href="/clips">
-        Clips
-        </a>
-      <a href="/blog">
+      </Link>
+      <Link to="/blog">
         Blog
-        </a>
-      <a href="/web">
+      </Link>
+      <Link to="/clips">
+        Clips
+        </Link>
+      <Link to="/web">
         Web dev
-        </a>
+      </Link>
 
     </StyledNav>
   )

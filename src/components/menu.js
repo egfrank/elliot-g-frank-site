@@ -17,13 +17,13 @@ class Menu extends React.Component {
 	});
   }
 
-   render() {
-
+  render() {
+  
 	return (
 		<div>
           <Burger open={this.state.open} toggleOpen={this.toggleOpen}/>
           <Nav open={this.state.open} />
-        </div>
+    </div>
 	)}
 };
 
