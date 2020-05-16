@@ -4,10 +4,7 @@ import { graphql } from "gatsby"
 import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
-import styled from 'styled-components'
-
-
-
+import styled from "styled-components"
 
 const Placeholder = styled.h2`
   font-size: 2rem;
@@ -17,22 +14,16 @@ const Placeholder = styled.h2`
   font-weight: 400;
 `
 
-
 class ClipsIndex extends React.Component {
-
-
-
   render() {
     const { data } = this.props
     const posts = data.allMarkdownRemark.edges
-    if ( posts === undefined || posts.length === 0){
-      return (
-          <Placeholder>This blog is still under construction.</Placeholder>
-      )
+    if (posts === undefined || posts.length === 0) {
+      return <Placeholder>This blog is still under construction.</Placeholder>
     }
 
     return (
-      <BlogLayout location={this.props.location} title='Clips'>
+      <BlogLayout location={this.props.location} title="Clips">
         <SEO title="Clips" />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title
@@ -40,16 +31,15 @@ class ClipsIndex extends React.Component {
           return (
             <article key={node.fields.slug}>
               <header>
-              	<a style={{ boxShadow: `none` }} href={node.frontmatter.link}>
-                <h3
-                  style={{
-                    marginBottom: rhythm(1 / 4),
-                  }}
-                >
-                {title}
-                </h3>
-              	</a>
-                  
+                <a style={{ boxShadow: `none` }} href={node.frontmatter.link}>
+                  <h3
+                    style={{
+                      marginBottom: rhythm(1 / 4),
+                    }}
+                  >
+                    {title}
+                  </h3>
+                </a>
 
                 <small>{node.frontmatter.date}</small>
               </header>
@@ -61,9 +51,8 @@ class ClipsIndex extends React.Component {
                 />
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.source
+                    __html: node.frontmatter.source,
                   }}
-
                 />
               </section>
             </article>
@@ -84,11 +73,10 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          filter: {fileAbsolutePath: {regex: "/\/clips\//"}}
-          limit: 1000
-    )
-    {
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fileAbsolutePath: { regex: "//clips//" } }
+      limit: 1000
+    ) {
       edges {
         node {
           excerpt

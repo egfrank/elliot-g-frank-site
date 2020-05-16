@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const StyledBurger = styled.button`
   position: absolute;
@@ -14,18 +14,18 @@ export const StyledBurger = styled.button`
   cursor: pointer;
   padding: 0;
   z-index: 10;
-  
+
   &:focus {
     outline: none;
   }
-  
+
   div {
     width: 1.5rem;
     height: 0.2rem;
-    background: #3000B7;
+    background: #3000b7;
     border-radius: 20rem;
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;
   }
-`;
+`

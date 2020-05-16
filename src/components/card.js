@@ -1,7 +1,6 @@
 import React from "react"
-import styled from 'styled-components'
+import styled from "styled-components"
 import Img from "gatsby-image"
-
 
 const ProjectItem = styled.div`
   background-color: rgba(255, 255, 255, 0.89);
@@ -14,8 +13,8 @@ const ProjectItem = styled.div`
 `
 
 const ProjectName = styled.h3`
-  font-family: 'Lato', sans-serif;
-  color: rgba(0,77,40,1);
+  font-family: "Lato", sans-serif;
+  color: rgba(0, 77, 40, 1);
   font-size: 1.5rem;
   line-height: 1.75rem;
   text-align: left;
@@ -23,12 +22,10 @@ const ProjectName = styled.h3`
   font-weight: 500;
 `
 
-
 const ProjectDescription = styled.p`
   font-size: 1rem;
-  font-family: 'Lato', sans-serif;
-  color: rgba(0,77,40,1);
-
+  font-family: "Lato", sans-serif;
+  color: rgba(0, 77, 40, 1);
 `
 
 const TextContainer = styled.div`
@@ -38,41 +35,37 @@ const TextContainer = styled.div`
 const ExternalLink = styled.p`
   a {
     box-shadow: none;
-    color: #3000B7;
+    color: #3000b7;
   }
-  font-size: .75rem;
+  font-size: 0.75rem;
 `
 const ImageContainer = styled.div`
   width: 100%;
   margin: 0 auto;
 `
 
-
-const Card = ( {node} ) => {
+const Card = ({ node }) => {
   return (
     <ProjectItem>
       <ImageContainer>
         <a href={node.frontmatter.site}>
-        <Img fluid={node.frontmatter.featuredImage.childImageSharp.fluid}/>
+          <Img fluid={node.frontmatter.featuredImage.childImageSharp.fluid} />
         </a>
       </ImageContainer>
 
       <TextContainer>
-          <ProjectName><a href={node.frontmatter.site}>{node.frontmatter.title}</a></ProjectName>
-          <ProjectDescription>{node.frontmatter.description}</ProjectDescription>
-          <ExternalLink>
-            <a href={node.frontmatter.backend}> Backend code </a>| 
-            <a href={node.frontmatter.frontend}> Frontend code</a><br/>
-          </ExternalLink>
+        <ProjectName>
+          <a href={node.frontmatter.site}>{node.frontmatter.title}</a>
+        </ProjectName>
+        <ProjectDescription>{node.frontmatter.description}</ProjectDescription>
+        <ExternalLink>
+          <a href={node.frontmatter.backend}> Backend code </a>|
+          <a href={node.frontmatter.frontend}> Frontend code</a>
+          <br />
+        </ExternalLink>
       </TextContainer>
     </ProjectItem>
-    );
+  )
 }
 
-export default Card;
-
-
-
-
-
-
+export default Card

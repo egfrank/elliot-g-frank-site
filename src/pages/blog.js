@@ -4,13 +4,10 @@ import { Link, graphql } from "gatsby"
 import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
-import styled from 'styled-components'
-
-
-
+import styled from "styled-components"
 
 const Title = styled.h2`
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 2rem;
   line-height: 2.5rem;
   margin: 0;
@@ -20,22 +17,16 @@ const Title = styled.h2`
   grid-row: 2 / 3;
 `
 
-
 class BlogIndex extends React.Component {
-
-
-
   render() {
     const { data } = this.props
     const posts = data.allMarkdownRemark.edges
-    if ( posts === undefined || posts.length === 0){
-      return (
-          <Title>This blog is still under construction.</Title>
-      )
+    if (posts === undefined || posts.length === 0) {
+      return <Title>This blog is still under construction.</Title>
     }
 
     return (
-      <BlogLayout location={this.props.location} title='Blog'>
+      <BlogLayout location={this.props.location} title="Blog">
         <SEO title="Blog" />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
@@ -78,11 +69,10 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          filter: {fileAbsolutePath: {regex: "/\/blog\//"}}
-          limit: 1000
-    )
-    {
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fileAbsolutePath: { regex: "//blog//" } }
+      limit: 1000
+    ) {
       edges {
         node {
           excerpt

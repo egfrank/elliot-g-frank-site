@@ -1,12 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-import styled from 'styled-components'
+import styled from "styled-components"
 
 import Img from "gatsby-image"
 
-import BlogLayout from '../components/bloglayout'
-import SEO from '../components/seo'
-
+import BlogLayout from "../components/bloglayout"
+import SEO from "../components/seo"
 
 const PortfolioContainer = styled.div`
   box-size: border-box;
@@ -32,15 +31,14 @@ const ProjectHeader = styled.div`
 `
 
 const ProjectName = styled.h2`
-  font-family: 'Source Sans Pro', serif;
+  font-family: "Source Sans Pro", serif;
   font-weight: bold;
   font-size: 26px;
   margin: 26px 0;
 `
 
 const ProjectDescription = styled.p`
-  font-family: 'Source Serif Pro', serif;
-
+  font-family: "Source Serif Pro", serif;
 `
 
 const TextContainer = styled.div`
@@ -48,11 +46,9 @@ const TextContainer = styled.div`
   font-size: 20px;
   line-height: 150%;
   margin: 20px 20px;
-
 `
 
-
-const Project = ( {node} ) => {
+const Project = ({ node }) => {
   return (
     <ProjectItem>
       <ProjectHeader>
@@ -60,78 +56,61 @@ const Project = ( {node} ) => {
       </ProjectHeader>
 
       <TextContainer>
-          <ProjectName>{node.frontmatter.title}</ProjectName>
-          <ProjectDescription 
-            dangerouslySetInnerHTML={{__html: node.html}}/>
+        <ProjectName>{node.frontmatter.title}</ProjectName>
+        <ProjectDescription dangerouslySetInnerHTML={{ __html: node.html }} />
       </TextContainer>
     </ProjectItem>
-    );
+  )
 }
 
 class WebPortfolio extends React.Component {
-
   render() {
-    const data = this.props.data;
-    const blurbs = data.allMarkdownRemark.edges;
+    const data = this.props.data
+    const blurbs = data.allMarkdownRemark.edges
     return (
-      <BlogLayout title='Web development'>
+      <BlogLayout title="Web development">
         <SEO title="Web" />
-              <PortfolioContainer>
-              <PorfolioFlexBox>
-              { blurbs
-                .map((blurb) => {
-                  return (<Project key={blurb.node.id}
-                           node={blurb.node}
-                  />)
-                })
-              }
-              </PorfolioFlexBox>
-              </PortfolioContainer>
-
+        <PortfolioContainer>
+          <PorfolioFlexBox>
+            {blurbs.map(blurb => {
+              return <Project key={blurb.node.id} node={blurb.node} />
+            })}
+          </PorfolioFlexBox>
+        </PortfolioContainer>
       </BlogLayout>
     )
   }
 }
 
-
-export default WebPortfolio;
-
-
+export default WebPortfolio
 
 export const query = graphql`
-query IndexQuery {
-  allMarkdownRemark(
-    filter: {fileAbsolutePath: {regex: "/web.*blurb/"}}, 
-    sort: {fields: [frontmatter___date], order: DESC}) 
-  
-  {
-    totalCount
-    edges {
-      node {
-        id
-        frontmatter {
-          title
-          featuredImage {
-            childImageSharp {
-              fluid(maxWidth: 1000) {
-                ...GatsbyImageSharpFluid
+  query IndexQuery {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/web.*blurb/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 1000) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }
+          html
+          fileAbsolutePath
+          fields {
+            slug
+          }
         }
-        html
-        fileAbsolutePath
-        fields {
-          slug
-        }
-
       }
     }
   }
-}
 `
-
-
-
-
-

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const StyledNav = styled.nav`
   display: flex;
@@ -13,7 +13,7 @@ export const StyledNav = styled.nav`
   right: 0;
   transition: transform 0.3s ease-in-out;
   width: 100%;
-  transform: ${({ open }) => open ? 'translateX(0%)' : 'translateX(100%)'};
+  transform: ${({ open }) => (open ? "translateX(0%)" : "translateX(100%)")};
 
   @media (max-width: 576px) {
     width: 100%;
@@ -24,10 +24,10 @@ export const StyledNav = styled.nav`
     padding: 2rem 0;
     font-weight: bold;
     letter-spacing: 0.1rem;
-    color: #3000B7;
+    color: #3000b7;
     text-decoration: none;
     transition: color 0.3s linear;
-    
+
     @media (max-width: 576px) {
       font-size: 1.5rem;
       text-align: right;
@@ -37,4 +37,4 @@ export const StyledNav = styled.nav`
       color: rgba(139, 255, 172, 1);
     }
   }
-`;
+`

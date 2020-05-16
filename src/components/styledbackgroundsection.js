@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react"
 import { graphql, StaticQuery } from "gatsby"
-import Img from 'gatsby-image'
+import Img from "gatsby-image"
 
-import BackgroundImage from 'gatsby-background-image'
+import BackgroundImage from "gatsby-background-image"
 
 const BackgroundSection = ({ className, children }) => (
   <StaticQuery
@@ -17,23 +17,16 @@ const BackgroundSection = ({ className, children }) => (
         }
       }
     `}
-
     render={data => {
       // Set ImageData.
-      const imageData = data.desktop.childImageSharp.fluid;
+      const imageData = data.desktop.childImageSharp.fluid
       return (
-        <BackgroundImage
-          Tag="section"
-          className={className}
-          fluid={imageData}
-        >
-        {children}
+        <BackgroundImage Tag="section" className={className} fluid={imageData}>
+          {children}
         </BackgroundImage>
       )
     }}
   />
 )
 
-
-
-export default BackgroundSection;
+export default BackgroundSection
