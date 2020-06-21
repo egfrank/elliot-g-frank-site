@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import SocialLinks from "./sociallinks"
+import useScrollPosition from '@react-hook/window-scroll'
 
 
 const Footer = styled.div`
@@ -11,7 +12,7 @@ const Footer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border-top: 1px solid purple;
+  color: black;
 `
 
 const MobileFooter = styled(Footer)`
@@ -21,6 +22,8 @@ const MobileFooter = styled(Footer)`
   @media screen and (min-width: 1000px){
     display: none;
   }
+  background-color: palevioletred;
+  opacity: ${props => props.opacity || 1};
 `
 
 const Email = styled.div`
@@ -39,13 +42,15 @@ const SocialLinkContainer = styled.div`
   }
 `
 const MiddleFooter = () => {
+  const scrollY = useScrollPosition(30);
+  const opacity = 1 - scrollY / 400;
   return (
-    <MobileFooter>
-        <Email>elliot.g.frank@gmail.com</Email>
-        <SocialLinkContainer>
-          <SocialLinks />
-        </SocialLinkContainer>
-    </MobileFooter>
+      <MobileFooter opacity={opacity}>
+          <Email>elliot.g.frank@gmail.com</Email>
+          <SocialLinkContainer>
+            <SocialLinks />
+          </SocialLinkContainer>
+      </MobileFooter>
   )
 }
 
