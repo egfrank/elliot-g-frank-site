@@ -8,6 +8,15 @@ import SEO from "../components/seo"
 import { MiddleFooter, BottomFooter } from "../components/customfooter"
 
 
+
+const Divider = styled.div`
+  margin: 3rem auto;
+  width: 56px;
+  height: 16px;
+  background: rgba(47, 128, 237, 0.82);
+  box-shadow: 8px 8px 0px rgba(250, 255, 0, 0.53), 4px 4px 0px rgba(237, 47, 47, 0.5);
+`
+
 const Flex = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,7 +74,8 @@ const FullScreenBox = styled(ResponsiveBoxes)`
 `
 
 const Title = styled.h3`
-  font-size: 2rem;
+  font-family: Corben, serif;
+  font-size: 1.8rem;
   font-weight: 400;
   margin: 0 0 0 2rem;
 `
@@ -163,6 +173,14 @@ const Blog = props => {
         ))}
       </WritingEntries>
       <Dot/>
+      <Link
+        to="/clips"
+        style={{
+          color: "inherit",
+          textDecoration: "inherit",
+          boxShadow: "none",
+        }}
+      >Go to Blog -></Link>
     </Card>
   )
 }
@@ -271,8 +289,6 @@ const HomePage = ({ data, location }) => {
   return (
     <Flex>
       <SEO title="Home" />
-      <Menu />
-
       <FullScreenBox>
         <IntroBox>
           <Tagline>
@@ -290,42 +306,19 @@ const HomePage = ({ data, location }) => {
         </IntroBox>
       </FullScreenBox>
 
-      <Flex>
-        <Link
-          to="/blog"
-          style={{
-            color: "inherit",
-            textDecoration: "inherit",
-            boxShadow: "none",
-          }}
-        ><Title>Latest Posts</Title>
-        </Link>
+      <Flex style={{marginTop: "6rem"}}>
+        <Title>Latest Posts</Title>
         <Blog data={data}/>
       </Flex>
-
+      <Divider/>
       <Flex>
-        <Link
-          to="/clips"
-          style={{
-            color: "inherit",
-            textDecoration: "inherit",
-            boxShadow: "none",
-          }}
-        ><Title>Featured Clips</Title>
-        </Link>
+        <Title>Featured Clips</Title>
         <Clips data={data}/>
       </Flex>
-
+      <Divider/>
       <Flex>
-        <Link
-          to="/web"
-          style={{
-            color: "inherit",
-            textDecoration: "inherit",
-            boxShadow: "none",
-          }}
-        ><Title>Web development</Title>
-        </Link>
+        <Title>Web development</Title>
+        <WebDev data={data}/>
       </Flex>
       <BottomFooter />
     </Flex>
