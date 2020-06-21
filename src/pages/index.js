@@ -2,102 +2,114 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 
-import Card from "../components/card"
+import WebCard from "../components/card"
 import Menu from "../components/menu"
 import SEO from "../components/seo"
-import CustomFooter from "../components/customfooter"
+import { MiddleFooter, BottomFooter } from "../components/customfooter"
 
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-rows: 16rem 32rem 32rem 64rem 4rem;
-  grid-template-columns: 0 1fr 0;
-  @media (min-width: 800px) {
-    grid-template-columns: 1fr 800px 1fr;
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const IntroBox = styled.div`
+  flex: 1;
+  min-height: 100px;
+  min-width: 100px;
+`
+const MainLinks = styled(Flex)`
+  font-weight: normal;
+  color: #515151;
+  line-height: 153%;
+  margin: 36px 48px;
+  font-size: 24px;
+  @media screen and (min-width: 1000px){
+    font-size: 48px;
+    margin: 36px 36px;
+  }
+
+  a {
+    box-shadow: none;
   }
 `
 
-const Title = styled.h2`
-  font-family: "Lato", sans-serif;
+const Tagline = styled(Flex)`
+  color: #000000;
+  font-weight: normal;
+  font-size: 36px;
+  font-family: Corben, serif;
+  line-height: 153%;
+  margin: 48px 48px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  @media screen and (min-width: 1000px){
+    font-size: 72px;
+    line-height: 124%;
+    margin: 36px 36px;
+  }
+`
+
+
+const ResponsiveBoxes = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1000px){
+    flex-direction: row;
+  }
+`
+const FullScreenBox = styled(ResponsiveBoxes)`
+  height: 100vh;
+  @media screen and (min-width: 1000px){
+    height: auto;
+  }
+`
+
+const Title = styled.h3`
   font-size: 2rem;
-  line-height: 2.5rem;
-  margin: 0;
-  text-align: right;
   font-weight: 400;
-  grid-column: -6 / -2;
-  grid-row: 2 / 3;
+  margin: 0 0 0 2rem;
 `
+
+
 const WritingEntries = styled.div`
-  text-align: left;
-  grid-column: 2 / -2;
-  grid-row: 4 / 5;
 `
-
-const GreenLeft = styled.div`
-  background-color: rgba(139, 255, 172, 0.24);
-  grid-column: 1 / -4;
-  grid-row: 1 / 5;
-`
-
-const GreenRight = styled.div`
-  background-color: rgba(139, 255, 172, 0.24);
-  grid-column: 4 / -1;
-  grid-row: 1 / 5;
-`
-
 const IntroContainer = styled.div`
-  grid-row: 1 / 2;
-  grid-column: 2 / 3;
 `
 const IntroText = styled.div`
   font-size: 2.5em;
   line-height: 3rem;
   margin: 2rem;
 `
-const BlogContainer = styled.div`
-  grid-row: 2 / 3;
-  grid-column: 2 / 3;
-
-  display: grid;
-  grid-template-columns: 2rem 1rem 2.5rem minmax(auto, 720px) 2.5rem 1rem 2rem;
-  grid-template-rows: 32px 64px 64px 1fr 48px;
+const Card = styled.div`
+  margin: 2rem;
+  padding: 1rem 1.5rem 1rem 1rem;
+  background-color: #FCFDFF;
+  position: relative;
 `
 
-const ClipsContainer = styled.div`
-  grid-row: 3 / 4;
-  grid-column: 2 / 3;
-
-  display: grid;
-  grid-template-columns: 2rem 1rem 2.5rem minmax(auto, 45rem) 2.5rem 1rem 2rem;
-  grid-template-rows: 32px 64px 64px 1fr 48px;
+const Dot = styled.span`
+  position: absolute;
+  right: calc(-24px);
+  top: calc(50% - 32px);
+  height: 64px;
+  width: 64px;
+  background-color: #F2C94C;
+  border-radius: 50%;
+  display: inline-block;
 `
 
 const WebContainer = styled.div`
-  grid-row: 4 / 5;
-  grid-column: 2 / 3;
-  display: grid;
-  grid-template-columns: 1rem minmax(auto, 45rem) 1rem;
-  grid-template-rows: 1rem 6rem 1rem 1fr;
-  @media (min-width: 18.75rem) {
-    grid-template-rows: 1rem 3rem 1rem 1fr 1rem;
-  }
-  background-color: rgba(139, 255, 172, 0.24);
 `
 
 const WebTitle = styled(Title)`
   text-align: center;
   font-weight: 400;
-  grid-row: 2 / 3;
-  grid-column: 2 / -2;
 `
 
 const WebList = styled.div`
-  grid-row: 3 / 4;
-  grid-column: 1 / -1;
 `
 
 const ContactsContainer = styled.div`
-  grid-row: 5 / 6;
-  grid-column: 2 / 3;
 `
 
 const WritingTitle = styled.p`
@@ -140,20 +152,7 @@ const ClipEntry = props => {
 const Blog = props => {
   const nodes = props.data.blogContent.edges
   return (
-    <BlogContainer>
-      <Title>
-        <Link
-          to="/blog"
-          style={{
-            color: "inherit",
-            textDecoration: "inherit",
-            boxShadow: "none",
-          }}
-        >
-          Blog
-        </Link>
-      </Title>
-      <GreenLeft />
+    <Card>
       <WritingEntries>
         {nodes.map(entry => (
           <BlogEntry
@@ -163,29 +162,15 @@ const Blog = props => {
           />
         ))}
       </WritingEntries>
-    </BlogContainer>
+      <Dot/>
+    </Card>
   )
 }
 
 const Clips = props => {
   const nodes = props.data.clips.edges
   return (
-    <ClipsContainer>
-      <Title>
-        <Link
-          to="/clips"
-          style={{
-            color: "inherit",
-            textDecoration: "inherit",
-            boxShadow: "none",
-          }}
-        >
-          Clips
-        </Link>
-      </Title>
-
-      <GreenRight />
-
+    <Card>
       <WritingEntries>
         {nodes.map(entry => (
           <ClipEntry
@@ -194,7 +179,7 @@ const Clips = props => {
           />
         ))}
       </WritingEntries>
-    </ClipsContainer>
+    </Card>
   )
 }
 
@@ -204,21 +189,9 @@ class WebDev extends React.Component {
     const blurbs = data.webContent.edges
     return (
       <WebContainer>
-        <WebTitle>
-          <Link
-            to="/web"
-            style={{
-              color: "inherit",
-              textDecoration: "inherit",
-              boxShadow: "none",
-            }}
-          >
-            Web Development
-          </Link>
-        </WebTitle>
         <WebList>
           {blurbs.map(blurb => {
-            return <Card key={blurb.node.id} node={blurb.node} />
+            return <WebCard key={blurb.node.id} node={blurb.node} />
           })}
         </WebList>
       </WebContainer>
@@ -296,22 +269,66 @@ export const query = graphql`
 
 const HomePage = ({ data, location }) => {
   return (
-    <GridContainer>
+    <Flex>
       <SEO title="Home" />
       <Menu />
-      <IntroContainer>
-        <IntroText>
-          Elliot Frank is a writer and web developer based in Chicago.
-        </IntroText>
-      </IntroContainer>
 
-      <Blog data={data} />
-      <Clips data={data} />
-      <WebDev data={data} />
-      <ContactsContainer>
-        <CustomFooter />
-      </ContactsContainer>
-    </GridContainer>
+      <FullScreenBox>
+        <IntroBox>
+          <Tagline>
+          Elliot Frank is a writer and web developer based in Chicago.
+          </Tagline>
+        </IntroBox>
+        <IntroBox>
+          <MainLinks>
+            <Link to="/blog">Blog</Link>
+            <Link to="/clips">Clips</Link>
+            <Link to="/web">Web Development</Link>
+            <Link to="/">Special Projects</Link>
+          </MainLinks>
+          <MiddleFooter />
+        </IntroBox>
+      </FullScreenBox>
+
+      <Flex>
+        <Link
+          to="/blog"
+          style={{
+            color: "inherit",
+            textDecoration: "inherit",
+            boxShadow: "none",
+          }}
+        ><Title>Latest Posts</Title>
+        </Link>
+        <Blog data={data}/>
+      </Flex>
+
+      <Flex>
+        <Link
+          to="/clips"
+          style={{
+            color: "inherit",
+            textDecoration: "inherit",
+            boxShadow: "none",
+          }}
+        ><Title>Featured Clips</Title>
+        </Link>
+        <Clips data={data}/>
+      </Flex>
+
+      <Flex>
+        <Link
+          to="/web"
+          style={{
+            color: "inherit",
+            textDecoration: "inherit",
+            boxShadow: "none",
+          }}
+        ><Title>Web development</Title>
+        </Link>
+      </Flex>
+      <BottomFooter />
+    </Flex>
   )
 }
 

@@ -11,14 +11,15 @@ const Outline = styled.span`
   background: transparent;
   border: 1.2px solid purple;
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 32px;
+  width: 32px;
   box-sizing: bounding-box;
   align-items: center;
   justify-content: center;
   display: flex;
   font-size: 20px;
   color: purple;
+  margin: 0 4px;
 `
 
 const SocialLinks = () => {
@@ -39,7 +40,6 @@ const SocialLinks = () => {
         icon={["fab", "instagram"]}
         style={{ fontSize: "26px" }}
       />
-      <SocialLink link="mailto:elliot.g.frank@gmail.com" icon={"envelope"} />
     </React.Fragment>
   )
 }
