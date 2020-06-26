@@ -1,29 +1,62 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import styled from "styled-components"
 
 import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
-import styled from "styled-components"
+import {
+  WritingTitle,
+  WritingSubTitle,
+  DetailText
+} from "../components/text"
 
-const Title = styled.h2`
-  font-family: "Lato", sans-serif;
-  font-size: 2rem;
-  line-height: 2.5rem;
-  margin: 0;
-  text-align: right;
-  font-weight: 400;
-  grid-column: -6 / -2;
-  grid-row: 2 / 3;
+const Article = styled.div`
+  margin: 1rem 0;
 `
+const Header = styled.div`
+  margin-bottom: 1rem;
+`
+
+const Title = ({slug, title}) => {
+  if (slug) {
+    return (
+      <WritingTitle
+        margin="0 0 0.5rem 0"
+        style={{display:'inline'}}
+      >
+        <Link style={{ boxShadow: `none` }} to={slug}>
+          {title}
+        </Link>
+      
+      </WritingTitle>
+    )
+  } else {
+    return (
+      <WritingTitle
+        margin="0 0 0.5rem 0"
+        style={{display:'inline'}}
+      >{title}
+      </WritingTitle>
+    )
+  }
+}
+
+export const TitleSection = ({slug, title, date}) => {
+  return (
+    <Header>
+      <Title slug={slug} title={title}/>
+      <WritingSubTitle 
+        margin="0 0 0 1rem"
+        style={{display:'inline'}}
+      >{date}</WritingSubTitle>
+    </Header>
+  )
+}
 
 class BlogIndex extends React.Component {
   render() {
     const { data } = this.props
     const posts = data.allMarkdownRemark.edges
-    if (posts === undefined || posts.length === 0) {
-      return <Title>This blog is still under construction.</Title>
-    }
 
     return (
       <BlogLayout location={this.props.location} title="Blog">
@@ -31,27 +64,20 @@ class BlogIndex extends React.Component {
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
-            <article key={node.fields.slug}>
-              <header>
-                <h3
-                  style={{
-                    marginBottom: rhythm(1 / 4),
-                  }}
-                >
-                  <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                    {title}
-                  </Link>
-                </h3>
-                <small>{node.frontmatter.date}</small>
-              </header>
+            <Article key={node.fields.slug}>
+              <TitleSection 
+                slug={node.fields.slug}
+                date={node.frontmatter.date}
+                title={title}
+              />
               <section>
-                <p
+                <WritingSubTitle
                   dangerouslySetInnerHTML={{
                     __html: node.frontmatter.description || node.excerpt,
                   }}
                 />
               </section>
-            </article>
+            </Article>
           )
         })}
       </BlogLayout>

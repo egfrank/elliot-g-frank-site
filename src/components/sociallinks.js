@@ -9,7 +9,7 @@ library.add(fab, faFile, faEnvelope)
 
 const Outline = styled.span`
   background: transparent;
-  border: 1.2px solid purple;
+  border: 1.2px solid black;
   border-radius: 50%;
   height: 32px;
   width: 32px;
@@ -18,7 +18,7 @@ const Outline = styled.span`
   justify-content: center;
   display: flex;
   font-size: 20px;
-  color: purple;
+  color: black;
   margin: 0 4px;
 `
 

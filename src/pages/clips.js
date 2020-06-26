@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 
 import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
 import styled from "styled-components"
 
 const Placeholder = styled.h2`
@@ -34,7 +33,7 @@ class ClipsIndex extends React.Component {
                 <a style={{ boxShadow: `none` }} href={node.frontmatter.link}>
                   <h3
                     style={{
-                      marginBottom: rhythm(1 / 4),
+                      marginBottom: "1rem",
                     }}
                   >
                     {title}

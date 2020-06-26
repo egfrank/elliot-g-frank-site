@@ -1,41 +1,43 @@
 import React from "react"
 import styled from "styled-components"
-import { Reset } from "styled-reset"
 import Menu from "./menu"
 import CustomFooter from "./customfooter"
+import {SectionTitle} from "../components/text"
 
 import "../styles/index.css"
 
-const PageTitle = styled.h1`
-  color: #2f6853;
-  font-size: 3rem;
-  text-align: left;
-  margin: 4rem 0 4rem 2rem;
+
+
+const Container = styled.div`
+  overflow-x: hidden;
 `
 
-const Title = ({ title }) => {
-  return <PageTitle>{title}</PageTitle>
-}
-const Main = styled.div``
+const Header = styled.div`
+  height: 10vh;
+  width: 85vw;
+  margin: 4rem auto 2rem;
+`
 
-const Body = styled.div`
-  overflow-x: hidden;
+const Main = styled.div`
+  min-height: 72vh;
+  width: 85vw;
+  margin: 0 auto;
 `
 
 class BlogLayout extends React.Component {
   render() {
     const { children, title } = this.props
     return (
-      <Body>
-        <Reset />
+      <Container>
         <Menu />
-
+      <Header>
+        <SectionTitle margin="0">{title}</SectionTitle>
+      </Header>
         <Main>
-          <Title title={title} />
           {children}
         </Main>
         <CustomFooter />
-      </Body>
+      </Container>
     )
   }
 }

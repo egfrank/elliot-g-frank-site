@@ -3,18 +3,17 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 
 const ProjectItem = styled.div`
-  background-color: rgba(255, 255, 255, 0.89);
-  a {
-    box-shadow: none;
-    color: inherit;
-  }
-  width: 100%;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  margin: 2rem;
+  padding: 1rem;
+  background-color: #FCFDFF;
+  position: relative;
 `
 
-const ProjectName = styled.h3`
+const ProjectName = styled.p`
   font-family: "Lato", sans-serif;
-  color: rgba(0, 77, 40, 1);
+  color: black;
   font-size: 1.5rem;
   line-height: 1.75rem;
   text-align: left;
@@ -25,23 +24,23 @@ const ProjectName = styled.h3`
 const ProjectDescription = styled.p`
   font-size: 1rem;
   font-family: "Lato", sans-serif;
-  color: rgba(0, 77, 40, 1);
+  color: black;
 `
 
 const TextContainer = styled.div`
-  margin: 1rem;
+  padding: 0.25rem 1rem;
 `
 
 const ExternalLink = styled.p`
   a {
     box-shadow: none;
-    color: #3000b7;
+    color: black;
   }
   font-size: 0.75rem;
 `
 const ImageContainer = styled.div`
-  width: 100%;
-  margin: 0 auto;
+  padding: 0 1rem;
+  width: 200px;
 `
 
 const Card = ({ node }) => {

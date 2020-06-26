@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
+import {TitleSection} from "../pages/blog"
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -16,29 +16,14 @@ class BlogPostTemplate extends React.Component {
           description={post.frontmatter.description || post.excerpt}
         />
         <article>
-          <header>
-            <h1
-              style={{
-                marginTop: rhythm(1),
-                marginBottom: 0,
-              }}
-            >
-              {post.frontmatter.title}
-            </h1>
-            <p
-              style={{
-                ...scale(-1 / 5),
-                display: `block`,
-                marginBottom: rhythm(1),
-              }}
-            >
-              {post.frontmatter.date}
-            </p>
-          </header>
+          <TitleSection 
+            date={post.frontmatter.date}
+            title={post.frontmatter.title}
+          />
           <section dangerouslySetInnerHTML={{ __html: post.html }} />
           <hr
             style={{
-              marginBottom: rhythm(1),
+              marginBottom: "1rem",
             }}
           />
           <footer></footer>
