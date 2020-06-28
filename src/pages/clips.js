@@ -40,17 +40,19 @@ class ClipsIndex extends React.Component {
                   </h3>
                 </a>
 
-                <small>{node.frontmatter.date}</small>
+                <small style={{display:"inline"}}>{node.frontmatter.date}</small>
+                <p
+                  style={{display:"inline", marginLeft:"1rem"}}
+                  dangerouslySetInnerHTML={{
+                    __html: node.frontmatter.source,
+                  }}
+                />
+
               </header>
               <section>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: node.frontmatter.description || node.excerpt,
-                  }}
-                />
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.source,
                   }}
                 />
               </section>
