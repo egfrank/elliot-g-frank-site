@@ -6,8 +6,7 @@ import BlogLayout from "../components/bloglayout"
 import SEO from "../components/seo"
 import {
   WritingTitle,
-  WritingSubTitle,
-  DetailText
+  WritingSubTitle
 } from "../components/text"
 
 const Article = styled.div`

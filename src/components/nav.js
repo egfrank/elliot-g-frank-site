@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 
 const StyledNav = styled.nav`
+  z-index: 90;
   display: flex;
   flex-direction: column;
   justify-content: center;

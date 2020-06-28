@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled, {css} from "styled-components"
-import WebCard from "../components/webcard"
+import WebCard from "../components/webdev"
 import SEO from "../components/seo"
 import { MiddleFooter, BottomFooter } from "../components/customfooter"
 import {
@@ -13,62 +13,18 @@ import {
 } from "../components/text"
 
 
-const SideDecoration = styled.span`
-  position: absolute;
-  height: ${props => props.height}px;
-  width: ${props => props.width || 0}px;
-  background-color: ${props => props.color || "papayawhip"};
-  ${props => props.top && css`
-    top: ${props => props.top}px;
-  `};
-  ${props => props.left && css`
-    left: ${props => props.left}px;
-  `};
-  ${props => props.right && css`
-    right: ${props => props.right}px;
-  `};
-  ${props => props.bottom && css`
-    bottom: ${props => props.bottom}px;
-  `};
+import {
+  TaglineContainer,
+  SideDecoration,
+  Divider,
+  Flex,
+  IntroBox,
+  ResponsiveBoxes,
+  FullScreenBox
+} from "../components/layoutcomponents"
 
 
-  @media screen and (min-width: 1000px){
-    ${props => props.widthD && css`
-      width: ${props => props.widthD}px;
-    `};
 
-    ${props => props.topD && css`
-      top: ${props => props.topD}px;
-    `};
-    ${props => props.leftD && css`
-      left: ${props => props.leftD}px;
-    `};
-    ${props => props.rightD && css`
-      right: ${props => props.rightD}px;
-    `};
-    ${props => props.bottomD && css`
-      bottom: ${props => props.bottomD}px;
-    `};
-  }
-
-`
-const Divider = styled.div`
-  margin: 3rem auto;
-  width: 56px;
-  height: 16px;
-  background: rgba(47, 128, 237, 0.82);
-  box-shadow: 8px 8px 0px rgba(250, 255, 0, 0.53), 4px 4px 0px rgba(237, 47, 47, 0.5);
-`
-
-const Flex = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const IntroBox = styled.div`
-  flex: 1;
-  position: relative;
-`
 const MainLinks = styled(Flex)`
   font-weight: normal;
   color: #515151;
@@ -84,30 +40,7 @@ const MainLinks = styled(Flex)`
   }
 `
 
-const TaglineContainer = styled(Flex)`
-  padding: 3rem;
-  max-width: 524px;
-  @media screen and (min-width: 1000px){
-    margin: 0 auto;
-    padding: 3rem;
-    max-width: 524px;
-  }
-`
 
-
-const ResponsiveBoxes = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media screen and (min-width: 1000px){
-    flex-direction: row;
-  }
-`
-const FullScreenBox = styled(ResponsiveBoxes)`
-  height: 100vh;
-  @media screen and (min-width: 1000px){
-    height: auto;
-  }
-`
 
 const WritingEntries = styled.div`
 `
@@ -129,14 +62,6 @@ const Dot = styled.span`
   border-radius: 50%;
   display: inline-block;
 `
-
-const WebContainer = styled.div`
-`
-
-
-const WebList = styled.div`
-`
-
 
 const BlogEntry = props => {
   return (
@@ -226,21 +151,23 @@ const Clips = props => {
   )
 }
 
-class WebDev extends React.Component {
+export class WebDev extends React.Component {
   render() {
     const data = this.props.data
     const blurbs = data.webContent.edges
     return (
-      <WebContainer>
-        <WebList>
+      <div>
+        <div>
           {blurbs.map(blurb => {
             return <WebCard key={blurb.node.id} node={blurb.node} />
           })}
-        </WebList>
-      </WebContainer>
+        </div>
+      </div>
     )
   }
 }
+
+
 
 export const query = graphql`
   query {

@@ -43,6 +43,8 @@ const ImageContainer = styled.div`
   width: 200px;
 `
 
+
+
 const Card = ({ node }) => {
   return (
     <ProjectItem>
