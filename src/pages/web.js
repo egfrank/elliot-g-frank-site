@@ -1,142 +1,110 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
-import styled from 'styled-components'
+import { graphql } from "gatsby"
+import styled from "styled-components"
+import SEO from "../components/seo"
+import Menu from "../components/menu"
+import CustomFooter from "../components/customfooter"
+import {
+  TaglineContainer,
+  SideDecoration,
+  Divider,
+  Flex,
+  IntroBox,
+  ResponsiveBoxes,
+  FullScreenBox
+} from "../components/layoutcomponents"
 
-import Img from "gatsby-image"
+import {
+  Tagline,
+  SectionTitle,
+  WritingTitle,
+  WritingSubTitle,
+  CustomLink,
+} from "../components/text"
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
 
+import { WebDev } from "../pages/index"
 
-const PortfolioContainer = styled.div`
-  box-size: border-box;
-  margin: 50px 50px 0 0;
+const TitleBox = styled(IntroBox)`
+  margin-top: 3rem;
 `
 
-const PorfolioFlexBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: -30px 0;
-`
-
-const ProjectItem = styled.div`
-  margin: 30px 0;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: white;
-`
-
-const ProjectHeader = styled.div`
-  max-height: 30%;
-  max-width: 100%;
-  background-color: grey;
-`
-
-const ProjectName = styled.h2`
-  font-family: 'Source Sans Pro', serif;
-  font-weight: bold;
-  font-size: 26px;
-  margin: 26px 0;
-`
-
-const ProjectDescription = styled.p`
-  font-family: 'Source Serif Pro', serif;
-
-`
-
-const TextContainer = styled.div`
-  color: black;
-  font-size: 20px;
-  line-height: 150%;
-  margin: 20px 20px;
-
-`
-const Em = styled.span`
-  font-weight: bold;
-` 
-
-
-
-const Project = ( {node} ) => {
-  return (
-    <ProjectItem>
-      <ProjectHeader>
-        <Img fluid={node.frontmatter.featuredImage.childImageSharp.fluid} />
-      </ProjectHeader>
-
-      <TextContainer>
-          <ProjectName>{node.frontmatter.title}</ProjectName>
-          <ProjectDescription 
-            dangerouslySetInnerHTML={{__html: node.html}}/>
-      </TextContainer>
-    </ProjectItem>
-    );
-}
-
-class WebPortfolio extends React.Component {
-
-  render() {
-    const data = this.props.data;
-    const blurbs = data.allMarkdownRemark.edges;
-    return (
-      <Layout title='Web development'>
-        <SEO title="Web" />
-              <PortfolioContainer>
-              <PorfolioFlexBox>
-              { data.allMarkdownRemark.edges
-                .map((blurb) => {
-                  return (<Project key={blurb.node.id}
-                           node={blurb.node}
-                  />)
-                })
-              }
-              </PorfolioFlexBox>
-              </PortfolioContainer>
-
-      </Layout>
-    )
+export const CTA = styled.div`
+  margin: 2rem;
+  padding: 1rem;
+  max-width: 524px;
+  @media screen and (min-width: 1000px){
+    margin: 0;
+    padding: 1rem;
+    max-width: 400px;
   }
+  background-color: papayawhip;
+`
+const WebPortfolio = ({data}) => {  
+  return (
+    <Flex>
+      <Menu/>
+      <ResponsiveBoxes>
+        <TitleBox>
+        <SideDecoration
+          height={150} 
+          left={0} 
+          top={3} 
+          width={4}
+          color="Aquamarine"/>
+          <SectionTitle>
+          Web Development
+          </SectionTitle>
+        </TitleBox>
+        <TitleBox>
+          <CTA>
+            <WritingSubTitle>
+            Hello! I'm currently looking for part, contract, or full-time work. 
+            Additionally, if you're a community-based leftist organization I'm 
+            likely available to donate time for free.
+            </WritingSubTitle>
+          </CTA>
+        </TitleBox>
+      </ResponsiveBoxes>
+
+      <SEO title="Web" />
+      <WebDev data={data} />
+      <CustomFooter/>
+    </Flex>
+  )
+  
 }
 
-
-export default WebPortfolio;
-
-
+export default WebPortfolio
 
 export const query = graphql`
-query IndexQuery {
-  allMarkdownRemark(
-    filter: {fileAbsolutePath: {regex: "/web.*blurb/"}}, 
-    sort: {fields: [frontmatter___date], order: DESC}) 
-  
-  {
-    totalCount
-    edges {
-      node {
-        id
-        frontmatter {
-          title
-          featuredImage {
-            childImageSharp {
-              fluid(maxWidth: 1000) {
-                ...GatsbyImageSharpFluid
+  query {
+    webContent: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/content/web.*blurb/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 2
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            description
+            site
+            frontend
+            backend
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 1000) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }
         }
-        html
-        fileAbsolutePath
-        fields {
-          slug
-        }
-
       }
     }
+
   }
-}
-
 `
-
-
-
-
-
