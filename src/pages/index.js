@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import styled, {css} from "styled-components"
 import WebCard from "../components/webdev"
 import SEO from "../components/seo"
-import { MiddleFooter, BottomFooter } from "../components/customfooter"
+import { BottomFooter } from "../components/customfooter"
 import {
   Tagline,
   SectionTitle,
@@ -269,8 +269,6 @@ const HomePage = ({ data, location }) => {
             <CustomLink to="/web">Web Development</CustomLink>
           </MainLinks>
         </IntroBox>
-        <MiddleFooter/>
-
       </FullScreenBox>
 
       <Flex style={{marginTop: "6rem"}}>
