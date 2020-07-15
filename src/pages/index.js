@@ -267,11 +267,10 @@ const HomePage = ({ data, location }) => {
             <CustomLink to="/blog">Blog</CustomLink>
             <CustomLink to="/clips">Clips</CustomLink>
             <CustomLink to="/web">Web Development</CustomLink>
-            <CustomLink to="/">Special Projects</CustomLink>
           </MainLinks>
-          
         </IntroBox>
-      <MiddleFooter />
+        <MiddleFooter/>
+
       </FullScreenBox>
 
       <Flex style={{marginTop: "6rem"}}>

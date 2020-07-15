@@ -70,6 +70,7 @@ export const ResponsiveBoxes = styled.div`
 `
 export const FullScreenBox = styled(ResponsiveBoxes)`
   height: 100vh;
+  min-height: -webkit-fill-available;
   @media screen and (min-width: 1000px){
     height: auto;
   }
